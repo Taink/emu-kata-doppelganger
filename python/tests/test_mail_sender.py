@@ -36,7 +36,10 @@ def test_send_v2():
     fake_http_client = FakeHttpClient(503)
     fake_message = "coucou"
     mail_sender = MailSender(fake_http_client)
-    fake_user = User("benjamin" , "benjamin@hotmail.fr" )
-    response = mail_sender.send_v2(fake_user, 'coucou')
-    assert response == (Request(fake_user.name, fake_user.email,"New notification", fake_message))
+    fake_user = User("benjamin" , "benjamin@hotmail.fr")
 
+    expected = Request(fake_user.name, fake_user.email,"New notification", fake_message)
+    actual = mail_sender.send_v2(fake_user, 'coucou')
+    
+    assert len(fake_http_client.post_calls) > 1
+    assert expected == actual
