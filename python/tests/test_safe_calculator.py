@@ -10,4 +10,3 @@ def test_divide_should_not_raise_any_error_when_authorized():
 
     result = calculator.add(2,3)
     assert result == 5
-    # pass
